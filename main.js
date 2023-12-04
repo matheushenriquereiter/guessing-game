@@ -39,17 +39,19 @@ const getSingleOrPlural = (single, plural, amount) => amount === 1
 
 const execGame = async () => {
   const numberToGuess = Math.floor(Math.random() * 10) + 1;
-  const guesses = [];
 
+  let guessesAmount = 1;
   let shouldContinueGame = true;
 
-  log("Try to guess a number from 1 to 10!")
+  log("Try to guess a number from 1 to 10!");
 
   while(shouldContinueGame) {
+    log(numberToGuess);
     const playerGuess = getPlayerGuess();
 
     if(playerGuess !== numberToGuess) {
-      guesses.push(playerGuess);
+      guessesAmount += 1;
+      console.log(guessesAmount);
   
       playerGuess > numberToGuess
         ? log("The number is lower!")
@@ -58,7 +60,6 @@ const execGame = async () => {
       continue;
     }
 
-    const guessesAmount = guesses.length + 1  
     const attemptSingleOrPlural = getSingleOrPlural("attempt", "attempts", guessesAmount);
 
     log(`You won, it took ${guessesAmount} ${attemptSingleOrPlural}!`);
