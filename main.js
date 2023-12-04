@@ -5,6 +5,8 @@ const log = (...values) => console.log(...values);
 
 let questionIndex = 0;
 
+const getColoredString = (string, color) => `\x1b[${color}m${string}\x1b[0m`;
+
 const getPlayerGuess = () => {
   const questions = ["Enter a guess: ", "Enter other guess: ", "Enter another guess: "];
   
@@ -18,13 +20,13 @@ const getPlayerGuess = () => {
     }
     
     if(!playerGuess) {
-      log("Guess should be a number");
+      log(getColoredString("Guess should be a number", 31));
 
       continue;
     };
 
     if(playerGuess < 1 || playerGuess > 10) {
-      log("Number must be between 1 and 10");
+      log(getColoredString("Number must be between 1 and 10", 31));
 
       continue;
     };
@@ -43,7 +45,7 @@ const execGame = async () => {
   let guessesAmount = 1;
   let shouldContinueGame = true;
 
-  log("Try to guess a number from 1 to 10!");
+  log(`Try to ${getColoredString("guess", 32)} a number from ${getColoredString("1", 32)} to ${getColoredString("10", 32)}!`);
 
   while(shouldContinueGame) {
     const playerGuess = getPlayerGuess();
@@ -52,19 +54,20 @@ const execGame = async () => {
       guessesAmount += 1;
   
       playerGuess > numberToGuess
-        ? log("The number is lower!")
-        : log("The number is greater!");
+        ? log(`The number is ${getColoredString("lower", 33)}!`)
+        : log(`The number is ${getColoredString("greater", 33)}!`);
 
       continue;
     }
 
     const attemptSingleOrPlural = getSingleOrPlural("attempt", "attempts", guessesAmount);
 
-    log(`You won, it took ${guessesAmount} ${attemptSingleOrPlural}!`);
+    log(`You ${getColoredString("won", 32)}, it took ${getColoredString(guessesAmount, 32)} ${attemptSingleOrPlural}!`);
 
     const wantsKeepPlaying = read("Want to keep playing? (Y/n): ").trim();
 
     if(wantsKeepPlaying.toLowerCase() === "n") {
+      log("Bye!");
       process.exit(0);
     }
 
