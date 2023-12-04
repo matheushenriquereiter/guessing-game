@@ -16,15 +16,15 @@ const getPlayerGuess = () => {
     if (questionIndex < 2) {
       questionIndex++;
     }
- 
-    if(playerGuess < 1 || playerGuess > 10) {
-      log("Number must be between 1 and 10");
+    
+    if(!playerGuess) {
+      log("Guess should be a number");
 
       continue;
     };
 
-    if(!playerGuess) {
-      log("Invalid value");
+    if(playerGuess < 1 || playerGuess > 10) {
+      log("Number must be between 1 and 10");
 
       continue;
     };
@@ -33,8 +33,8 @@ const getPlayerGuess = () => {
   }
 }
 
-const getSingleOrPlural = (single, plural, amount) => amount === 1 
-  ? single
+const getSingleOrPlural = (singular, plural, amount) => amount === 1 
+  ? singular
   : plural;
 
 const execGame = async () => {
@@ -46,12 +46,10 @@ const execGame = async () => {
   log("Try to guess a number from 1 to 10!");
 
   while(shouldContinueGame) {
-    log(numberToGuess);
     const playerGuess = getPlayerGuess();
 
     if(playerGuess !== numberToGuess) {
       guessesAmount += 1;
-      console.log(guessesAmount);
   
       playerGuess > numberToGuess
         ? log("The number is lower!")
