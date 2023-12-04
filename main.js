@@ -46,7 +46,6 @@ const execGame = async () => {
   log("Try to guess a number from 1 to 10!")
 
   while(shouldContinueGame) {
-    log(numberToGuess);
     const playerGuess = getPlayerGuess();
 
     if(playerGuess !== numberToGuess) {
