@@ -35,7 +35,7 @@ const getPlayerGuess = () => {
   }
 }
 
-const getSingleOrPlural = (singular, plural, amount) => amount === 1 
+const getSingularOrPlural = (singular, plural, amount) => amount === 1 
   ? singular
   : plural;
 
@@ -43,11 +43,10 @@ const execGame = async () => {
   const numberToGuess = Math.floor(Math.random() * 10) + 1;
 
   let guessesAmount = 1;
-  let shouldContinueGame = true;
 
   log(`Try to ${getColoredString("guess", 32)} a number from ${getColoredString("1", 32)} to ${getColoredString("10", 32)}!`);
 
-  while(shouldContinueGame) {
+  while (true) {
     const playerGuess = getPlayerGuess();
 
     if(playerGuess !== numberToGuess) {
@@ -60,7 +59,7 @@ const execGame = async () => {
       continue;
     }
 
-    const attemptSingleOrPlural = getSingleOrPlural("attempt", "attempts", guessesAmount);
+    const attemptSingleOrPlural = getSingularOrPlural("attempt", "attempts", guessesAmount);
 
     log(`You ${getColoredString("won", 32)}, it took ${getColoredString(guessesAmount, 32)} ${attemptSingleOrPlural}!`);
 
