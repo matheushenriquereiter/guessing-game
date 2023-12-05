@@ -19,14 +19,14 @@ const getPlayerGuess = () => {
       questionIndex++;
     }
     
-    if(!playerGuess) {
-      log(getColoredString("Guess should be a number", 31));
+    if(playerGuess < 1 || playerGuess > 10) {
+      log(getColoredString("Number must be between 1 and 10", 31));
 
       continue;
     };
 
-    if(playerGuess < 1 || playerGuess > 10) {
-      log(getColoredString("Number must be between 1 and 10", 31));
+     if(!playerGuess) {
+      log(getColoredString("Guess should be a number", 31));
 
       continue;
     };
